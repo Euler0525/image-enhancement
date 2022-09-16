@@ -1,1 +1,1 @@
-from . import enlarge, shrink
+from . import enhance
