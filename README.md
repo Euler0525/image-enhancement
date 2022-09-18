@@ -94,6 +94,10 @@ $$
 f(x,y)=(y_2-y)(x_2-x)f(x_1, y_1) + (y_2-y)(x-x_1)f(x_2,y_1)+(y-y_1)(x_2-x)f(x_1,y_2) + (y-y_1)(x-x_1)f(x_2,y_2)
 $$
 
+### 算法设计
+
+### 最邻近插值
+
 ## 项目目标
 
 利用最邻近插值和双线性插值对图像增强处理。
@@ -128,10 +132,37 @@ pip install -r requirements.txt
 
 ## 项目功能
 
-通过命令行运行`main.py`，交互界面如下
+通过命令行运行`main.py`，按顺序分别指定原图路径，目标图路径，选择最邻近插值(n)或双线性插值(b)，宽度，高度
+
+```shell
+python ./test/test.png ./test/nearest.png n 1024 1024
+```
+
+<img src="file:///F:/ECEProjects/image-enhancement/img/interaction.png" title="" alt="interaction.png" width="579"> 
 
 ## 安装与使用
 
 ### 安装教程
 
 ### 使用实例
+
+```python
+# -*- coding: utf-8 -*-
+from enhance import *
+import fire
+
+
+def main(img: str, out_img: str, choice: str, w: int, h: int):
+    test_img = img
+    obj = enhance.Sample(test_img, w, h)
+    if choice == "n":
+        obj.nearestInterpolation().save(out_img)
+    elif choice == "b":
+        obj.bilinearInterpolation().save(out_img)
+    else:
+        exit()
+
+
+if __name__ == "__main__":
+    fire.Fire(main)
+```

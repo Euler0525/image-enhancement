@@ -3,9 +3,8 @@ from enhance import *
 import fire
 
 
-def main(img: str, out_img: str, choice: str, w: int, h: int):
-    test_img = img
-    obj = enhance.Sample(test_img, w, h)
+def main(in_img: str, out_img: str, choice: str, w: int, h: int):
+    obj = enhance.Sample(in_img, w, h)
     if choice == "n":
         obj.nearestInterpolation().save(out_img)
     elif choice == "b":
@@ -15,4 +14,7 @@ def main(img: str, out_img: str, choice: str, w: int, h: int):
 
 
 if __name__ == "__main__":
-    fire.Fire(main)
+    try:
+        fire.Fire(main)
+    except Exception as result:
+        print(result)
