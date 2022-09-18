@@ -28,7 +28,7 @@ class ImageProcess(object):
 
 
 class ModeError(Exception):
-    """img.mode异常"""
+    """img.mode exception"""
 
     def __init__(self, mode):
         self.support = ["RGB"]
