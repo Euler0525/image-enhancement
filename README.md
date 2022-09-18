@@ -47,12 +47,9 @@ $$
 插值函数为一次多项式，在其插值节点的误差为0。利用连接两个已知量的直线来确定这两个已知量之间（或之外）的某一个未知量的值，如图
 
 <img title="" src="./img/1.png" alt="" width="283">
-
 $$
 y=y_1 + \dfrac{y_2-y_1}{x_2-x_1}(x-x_1),(x_1<x<x_2)
 $$
-
-<!------ waiting ------>
 
 ##### 最邻近插值
 
@@ -104,11 +101,11 @@ $$
 
 ### 最邻近插值
 
-![near.png](.\img\near.png)
+![near.png](./img/near.png)
 
 ### 双线性插值
 
-![bili.png](F:\ECEProjects\image-enhancement\img\bili.png)
+![bili.png](./img/bili.png)
 
 ## 环境依赖
 
@@ -167,7 +164,7 @@ pip install -r requirements.txt
   - `ImageProcess.saveImage`：根据矩阵生成图片，返回`PIL.PngImagePlugin.PngImageFile`
   - `ModeError`：将其它类型转化成$RGB$图像
 
-![strcuture1.png](.\img\structure1.png)
+![strcuture1.png](./img/structure1.png)
 
 - **enhance.py**，结构如下图
   
@@ -175,7 +172,7 @@ pip install -r requirements.txt
   
   - `bilinearInterpolation`：双线性插值
 
-<img title="" src=".\img\strcuture2.png" alt="strcuture2.png" width="411">
+<img title="" src="./img/strcuture2.png" alt="strcuture2.png" width="411">
 
 - **main.py**：本项目测试程序
 
