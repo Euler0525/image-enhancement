@@ -128,7 +128,7 @@ pip install -r requirements.txt
 
 ## 项目功能
 
-运行`main.py`，交互界面如下
+通过命令行运行`main.py`，交互界面如下
 
 ## 安装与使用
 

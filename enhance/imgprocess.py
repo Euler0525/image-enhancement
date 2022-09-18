@@ -14,5 +14,4 @@ class ImageProcess(object):
     def saveImage(array):
         """convert array to image and return PIL.PngImagePlugin.PngImageFile"""
         out_img = Image.fromarray(array.astype("uint8")).convert("RGB")
-
         return out_img

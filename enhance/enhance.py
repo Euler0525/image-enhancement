@@ -13,6 +13,7 @@ class Sample(object):
         self.out_height = out_height
 
     def nearestInterpolation(self):
+        print("Start Nearest Neighbour Interpolation".center(50, "-"))
         """Nearest neighbour interpolation:"""
         out_img = np.zeros((self.out_height, self.out_width, 3), dtype=int)
         for i in range(self.out_height - 1):
@@ -20,11 +21,12 @@ class Sample(object):
                 h = round(i * ((self.height - 1) / self.out_height))
                 w = round(j * ((self.width - 1) / self.out_width))
                 out_img[i, j, :] = self.img_array[h, w, :]
-
+        print("End Nearest Neighbour Interpolation".center(50, "-"))
         return imgprocess.ImageProcess.saveImage(out_img)
 
     def bilinearInterpolation(self):
         """Bilinear interpolation"""
+        print("Start Bilinear Interpolation".center(50, "-"))
         # Projection
         width = \
             np.array([(i + 0.5) / self.out_width * self.width - 0.5 for i in range(self.out_width)], dtype=float)
@@ -55,6 +57,7 @@ class Sample(object):
         out_img = \
             (pixel_00 * weight_00).T + (pixel_01 * weight_01).T + (pixel_10 * weight_10).T + (pixel_11 * weight_11).T
 
+        print("End Bilinear Interpolation".center(50, "-"))
         return imgprocess.ImageProcess.saveImage(out_img)
 
 # def bilinearInterpolation(self):
