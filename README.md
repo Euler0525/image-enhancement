@@ -2,6 +2,22 @@
 
 ## 项目背景
 
+### 投影
+
+设原图的长和宽分别为$height$、$width$，目标图像的长和宽分别为$out\_height$、$out\_width$，投影的计算式为
+
+$$
+\dfrac{h}{out\_h} = \dfrac{height}{out\_height}\\
+\dfrac{w}{out\_w} = \dfrac{width}{out\_width}\\
+$$
+
+但如果直接这样投影，会导致目标图的中心与原图中心不能对齐，因为每个像素点是一个正方形，坐标为$(h,w)$的像素点的中心位置是$(h+0.5,w+0.5)$，所以投影的计算式应改为
+
+$$
+\dfrac{h+0.5}{out\_h} = \dfrac{height+0.5}{out\_height}\\
+\dfrac{w+0.5}{out\_w} = \dfrac{width+0.5}{out\_width}\\
+$$
+
 ### 图像增强
 
 为了增强图片的视觉效果，根据图像的应用场合，增强图片中的有用信息。有目的地强调图像的整体或局部特性，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，使之改善图像质量、丰富信息量，加强图像判读和识别效果，满足某些特殊分析的需要。
@@ -33,8 +49,6 @@
 $$
 y=y_1 + \dfrac{y_2-y_1}{x_2-x_1}(x-x_1),(x_1<x<x_2)
 $$
-
-**误差分析**
 
 <!------ waiting ------>
 
@@ -74,6 +88,12 @@ f(x,y)=\dfrac{(y_2-y)(x_2-x)}{(y_2-y_1)(x_2-x_1)}f(x_1, y_1) + \dfrac{(y_2-y)(x-
 +\dfrac{(y-y_1)(x_2-x)}{(y_2-y_1)(x_2-x_1)}f(x_1,y_2) + \dfrac{(y-y_1)(x-x_1)}{(y_2-y_1)(x_2-x_1)}f(x_2,y_2)
 $$
 
+由于周围4个点是离$P$最近的像素点，所以$y_2-y_1=1$，$x_2-x_1=1$，则计算式可写为
+
+$$
+f(x,y)=(y_2-y)(x_2-x)f(x_1, y_1) + (y_2-y)(x-x_1)f(x_2,y_1)+(y-y_1)(x_2-x)f(x_1,y_2) + (y-y_1)(x-x_1)f(x_2,y_2)
+$$
+
 ## 项目目标
 
 利用最邻近插值和双线性插值对图像增强处理。
@@ -88,7 +108,27 @@ pip install -r requirements.txt
 
 ## 项目结构
 
+### 源代码结构
+
+- **imgprocess.py**，结构如下图
+  - `openImage`：打开图片，返回`PIL.PngImagePlugin.PngImageFile`
+  - `saveImage`：根据矩阵生成图片，返回`PIL.PngImagePlugin.PngImageFile`
+
+![strcuture1.png](F:\ECEProjects\image-enhancement\img\strcuture1.png)
+
+- **enhance.py**，结构如下图
+  
+  - `nearestInterpolation`：最邻近插值
+  
+  - `bilinearInterpolation`：双线性插值
+
+![strcuture2.png](F:\ECEProjects\image-enhancement\img\strcuture2.png)
+
+- **main.py**：用于本项目测试
+
 ## 项目功能
+
+运行`main.py`，交互界面如下
 
 ## 安装与使用
 

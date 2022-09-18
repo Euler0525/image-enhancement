@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-
 from enhance import *
+import fire
 
 
-def main():
-    test_img = "./test/test.png"
-    obj = enhance.Sample(test_img, 200, 200)
-    obj.nearestInterpolation().save("./test/1.png")
-    obj.bilinearInterpolation().save("./test/2.png")
+def main(img: str, choice: str, w: int, h: int):
+    test_img = img
+    obj = enhance.Sample(test_img, w, h)
+    if choice == "n":
+        obj.nearestInterpolation().save("./test/nearest.png")
+    elif choice == "b":
+        obj.bilinearInterpolation().save("./test/bilinear.png")
+    else:
+        exit()
 
 
 if __name__ == "__main__":
-    main()
+    fire.Fire(main)
