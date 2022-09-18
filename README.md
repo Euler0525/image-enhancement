@@ -24,7 +24,7 @@ $$
 
 ### 图像插值技术
 
-将图片放大时，需要根据低分辨率下的像素值推测出它周围的像素值
+将图片放大时，需要根据低分辨率下的像素值推测出它周围的像素值。
 
 #### 分类
 
@@ -40,7 +40,9 @@ $$
     - 边缘对比度引导的图像插值(CGI)
   - 基于小波系数
 
-##### 线性插值
+本项目实现线性插值中的**最邻近插值**和**双线性插值**
+
+#### 线性插值
 
 插值函数为一次多项式，在其插值节点的误差为0。利用连接两个已知量的直线来确定这两个已知量之间（或之外）的某一个未知量的值，如图
 
@@ -94,17 +96,23 @@ $$
 f(x,y)=(y_2-y)(x_2-x)f(x_1, y_1) + (y_2-y)(x-x_1)f(x_2,y_1)+(y-y_1)(x_2-x)f(x_1,y_2) + (y-y_1)(x-x_1)f(x_2,y_2)
 $$
 
-### 算法设计
+## 项目目标
+
+利用最邻近插值和双线性插值算法实现图片的放大和缩小。
+
+## 算法设计
 
 ### 最邻近插值
 
-## 项目目标
+![near.png](.\img\near.png)
 
-利用最邻近插值和双线性插值对图像增强处理。
+### 双线性插值
+
+![bili.png](F:\ECEProjects\image-enhancement\img\bili.png)
 
 ## 环境依赖
 
-本项目采用python3.9.12解释器并且需要`numpy`第三方库及其依赖环境
+本项目采用python3.9.12解释器并且需要`numpy,pillow,fire`第三方库及其依赖环境。
 
 ```shell
 pip install -r requirements.txt
@@ -112,13 +120,54 @@ pip install -r requirements.txt
 
 ## 项目结构
 
+```shell
+.
+├── README.md
+├── enhance
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-39.pyc
+│   │   ├── enhance.cpython-39.pyc
+│   │   └── imgprocess.cpython-39.pyc
+│   ├── enhance.py  # 插值算法
+│   └── imgprocess.py  # 打开和保存图片
+├── img  # README所需图片
+│   ├── 1.png
+│   ├── 2.png
+│   ├── 3.png
+│   ├── bili.png
+│   ├── interaction.png
+│   ├── near.png
+│   ├── result.gif
+│   ├── strcuture2.png
+│   └── structure1.png
+├── main.py  # 测试程序
+├── requirements.txt
+└── test
+    ├── bilinear.png  # 利用双线性插值放大2倍的图片
+    ├── bilinear1.png  # 利用双线性插值缩小指定尺寸的图片
+    ├── bilinear2.png  # 利用双线性插值放大指定尺寸的图片
+    ├── nearest.png  # 利用最邻近插值放大2倍的图片
+    ├── nearest1.png  # 利用最邻近插值缩小指定尺寸的图片
+    ├── nearest2.png  # 利用最邻近插值放大指定尺寸的图片
+    └── test.png  # 原图片
+
+4 directories, 25 files
+```
+
+```shell
+# 最邻近差值 位于./enhance/enhance.py文件 第15行
+# 双线性插值 位于./enhance/enhance.py文件 第38行
+```
+
 ### 源代码结构
 
 - **imgprocess.py**，结构如下图
-  - `openImage`：打开图片，返回`PIL.PngImagePlugin.PngImageFile`
-  - `saveImage`：根据矩阵生成图片，返回`PIL.PngImagePlugin.PngImageFile`
+  - `ImageProcess.openImage`：打开图片，返回`PIL.PngImagePlugin.PngImageFile`
+  - `ImageProcess.saveImage`：根据矩阵生成图片，返回`PIL.PngImagePlugin.PngImageFile`
+  - `ModeError`：将其它类型转化成$RGB$图像
 
-![strcuture1.png](F:\ECEProjects\image-enhancement\img\strcuture1.png)
+![strcuture1.png](.\img\structure1.png)
 
 - **enhance.py**，结构如下图
   
@@ -126,25 +175,28 @@ pip install -r requirements.txt
   
   - `bilinearInterpolation`：双线性插值
 
-![strcuture2.png](F:\ECEProjects\image-enhancement\img\strcuture2.png)
+<img title="" src=".\img\strcuture2.png" alt="strcuture2.png" width="411">
 
-- **main.py**：用于本项目测试
+- **main.py**：本项目测试程序
 
 ## 项目功能
 
 通过命令行运行`main.py`，按顺序分别指定原图路径，目标图路径，选择最邻近插值(n)或双线性插值(b)，宽度，高度
 
 ```shell
-python ./test/test.png ./test/nearest.png n 1024 1024
+python ./test/test.png ./test/nearest.png n 1024 1024  # 最邻近插值
+python ./test/test.png ./test/bilinear.png b 1024 1024 # 双线性
 ```
 
-<img src="file:///F:/ECEProjects/image-enhancement/img/interaction.png" title="" alt="interaction.png" width="579"> 
+命令行操作截图：
 
-## 安装与使用
+![](./img/interaction.png)
 
-### 安装教程
+项目运行效果截图：
 
-### 使用实例
+<img title="" src="./img/result.gif" alt="result.gif" width="672">
+
+### 测试程序
 
 ```python
 # -*- coding: utf-8 -*-
